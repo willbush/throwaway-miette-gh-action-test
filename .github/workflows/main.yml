@@ -16,4 +16,4 @@ jobs:
 
       - name: Build and Run Crate
         run: |
-          TERM=xterm nix develop --command cargo run
+          nix develop --command cargo run
