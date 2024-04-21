@@ -1,39 +1,50 @@
-use miette::{Diagnostic, SourceSpan};
-use miette::{NamedSource, Result};
-use thiserror::Error;
+use ariadne::{Color, ColorGenerator, Fmt, Label, Report, ReportKind, Source};
 
-#[derive(Error, Debug, Diagnostic)]
-#[error("oops!")]
-#[diagnostic(
-    code(oops::my::bad),
-    url(docsrs),
-    help("try doing it better next time?")
-)]
-struct MyBad {
-    // The Source that we're gonna be printing snippets out of.
-    // This can be a String if you don't have or care about file names.
-    #[source_code]
-    src: NamedSource<String>,
-    // Snippets and highlights can be included in the diagnostic!
-    #[label("This bit here")]
-    bad_bit: SourceSpan,
-}
+fn main() {
+    let mut colors = ColorGenerator::new();
 
-fn this_fails() -> Result<()> {
-    // You can use plain strings as a `Source`, or anything that implements
-    // the one-method `Source` trait.
-    let src = "source\n  text\n    here".to_string();
-    println!("{}", src.len());
+    // Generate & choose some colours for each of our elements
+    let a = colors.next();
+    let b = colors.next();
+    let out = Color::Fixed(81);
+    let out2 = colors.next();
 
-    Err(MyBad {
-        src: NamedSource::new("bad_file.rs", src),
-        bad_bit: (18, 4).into(),
-    })?;
-
-    Ok(())
-}
-
-fn main() -> Result<()> {
-    this_fails()?;
-    Ok(())
+    Report::build(ReportKind::Error, "sample.tao", 12)
+        .with_code(3)
+        .with_message("Incompatible types".to_string())
+        .with_label(
+            Label::new(("sample.tao", 32..33))
+                .with_message(format!("This is of type {}", "Nat".fg(a)))
+                .with_color(a),
+        )
+        .with_label(
+            Label::new(("sample.tao", 42..45))
+                .with_message(format!("This is of type {}", "Str".fg(b)))
+                .with_color(b),
+        )
+        .with_label(
+            Label::new(("sample.tao", 11..48))
+                .with_message(format!(
+                    "The values are outputs of this {} expression",
+                    "match".fg(out),
+                ))
+                .with_color(out),
+        )
+        .with_label(
+            Label::new(("sample.tao", 0..48))
+                .with_message(format!("The {} has a problem", "definition".fg(out2),))
+                .with_color(out2),
+        )
+        .with_label(
+            Label::new(("sample.tao", 50..76))
+                .with_message(format!("Usage of {} here", "definition".fg(out2),))
+                .with_color(out2),
+        )
+        .with_note(format!(
+            "Outputs of {} expressions must coerce to the same type",
+            "match".fg(out)
+        ))
+        .finish()
+        .print(("sample.tao", Source::from(include_str!("sample.tao"))))
+        .unwrap();
 }

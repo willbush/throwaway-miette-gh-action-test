@@ -3,9 +3,8 @@ name = "throwaway-miette-gh-action-test"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 anyhow = "1.0.82"
-miette = { version = "7.2.0", features = ["fancy"] }
-thiserror = "1.0.58"
+ariadne = { version = "0.4.0", features = ["auto-color"] }
+# miette = { version = "7.2.0", features = ["fancy"] }
+# thiserror = "1.0.58"
