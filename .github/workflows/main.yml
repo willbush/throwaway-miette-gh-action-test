@@ -1,4 +1,4 @@
-name: Run crate to see error
+name: test
 
 on:
   workflow_dispatch: # allows manual triggering
@@ -16,4 +16,4 @@ jobs:
 
       - name: Build and Run Crate
         run: |
-          nix develop --command cargo run
+          CLICOLOR_FORCE=1 nix develop --command cargo run
