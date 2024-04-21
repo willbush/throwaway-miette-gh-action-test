@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-anyhow = "1.0.82"
-ariadne = { version = "0.4.0", features = ["auto-color"] }
+yansi = "1.0.1"
 # miette = { version = "7.2.0", features = ["fancy"] }
 # thiserror = "1.0.58"

@@ -51,10 +51,7 @@
           # Inherit inputs from checks.
           checks = self.checks.${system};
 
-          packages = with pkgs; [
-            rust-analyzer
-            cargo-expand
-          ];
+          packages = with pkgs; [ rust-analyzer ];
         };
       }
     );
