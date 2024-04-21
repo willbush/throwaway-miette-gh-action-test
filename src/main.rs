@@ -1,4 +1,4 @@
-use ariadne::{Color, ColorGenerator, Fmt, Label, Report, ReportKind, Source};
+use ariadne::{CharSet, Color, ColorGenerator, Config, Fmt, Label, Report, ReportKind, Source};
 
 fn main() {
     let mut colors = ColorGenerator::new();
@@ -10,6 +10,13 @@ fn main() {
     let out2 = colors.next();
 
     Report::build(ReportKind::Error, "sample.tao", 12)
+        .with_config(
+            Config::default()
+                .with_color(true)
+                // Using Ascii so that the inline snapshots display correctly
+                // even with fonts where characters like '┬' take up more space.
+                .with_char_set(CharSet::Unicode),
+        )
         .with_code(3)
         .with_message("Incompatible types".to_string())
         .with_label(
