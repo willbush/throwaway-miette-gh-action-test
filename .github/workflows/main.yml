@@ -1,0 +1,19 @@
+name: Run crate to see error
+
+on:
+  workflow_dispatch: # allows manual triggering
+
+jobs:
+  build_and_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
+
+      - name: Build and Run Crate
+        run: |
+          nix develop --command cargo run
