@@ -1,4 +1,4 @@
-name: test
+name: main
 
 on:
   workflow_dispatch: # allows manual triggering
@@ -16,4 +16,4 @@ jobs:
 
       - name: Build and Run Crate
         run: |
-          CLICOLOR_FORCE=1 nix develop --command cargo run
+          CLICOLOR=1 nix develop --command cargo run
