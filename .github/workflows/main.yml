@@ -15,8 +15,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v9
 
       - name: Build and Run Crate
+        env:
+          CLICOLOR_FORCE: 1
         run: |
-          echo $NO_COLOR
-          echo $CLICOLOR_FORCE
-          echo $CLICOLOR
-          CLICOLOR=1 nix develop --command cargo run
+          nix develop --command cargo run
