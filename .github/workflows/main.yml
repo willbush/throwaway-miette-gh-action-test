@@ -16,4 +16,7 @@ jobs:
 
       - name: Build and Run Crate
         run: |
+          echo $NO_COLOR
+          echo $CLICOLOR_FORCE
+          echo $CLICOLOR
           CLICOLOR=1 nix develop --command cargo run
