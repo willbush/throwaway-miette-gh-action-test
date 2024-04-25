@@ -19,6 +19,5 @@ jobs:
           CLICOLOR_FORCE: 1
           NO_COLOR: ""
         run: |
-          cmd="TERM=xterm nix eval --expr 'blah'"
-          script --return --quiet --log-out /dev/null --command "$cmd"
+          script --return --quiet --log-out /dev/null --command "TERM=xterm nix eval --expr 'blah'"
           nix develop --command cargo run
