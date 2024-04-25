@@ -17,6 +17,9 @@ jobs:
       - name: Build and Run Crate
         env:
           CLICOLOR_FORCE: 1
+          NO_COLOR: ""
+          TERM: xterm
         run: |
-          script --return --quiet --log-out /dev/null --command "unset NO_COLOR && TERM=xterm nix eval --expr 'blah'"
+          CMD="nix eval --expr 'blah'"
+          script --return --quiet --log-out /dev/null --command $CMD
           nix develop --command cargo run
