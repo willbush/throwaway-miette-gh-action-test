@@ -20,6 +20,6 @@ jobs:
           NO_COLOR: ""
           TERM: xterm
         run: |
-          CMD="nix eval --expr 'blah'"
-          script --return --quiet --log-out /dev/null --command $CMD
+          local cmd="nix eval --expr 'blah'"
+          script --return --quiet --log-out /dev/null --command "$cmd"
           nix develop --command cargo run
