@@ -18,5 +18,9 @@ jobs:
         env:
           CLICOLOR_FORCE: 1
         run: |
-          script --return --quiet --log-out /dev/null --command "unset NO_COLOR && TERM=xterm nix eval --expr 'blah'"
-          nix develop --command cargo run
+          script --return \
+            --quiet \
+            --log-out /dev/null \
+            --command "unset NO_COLOR && TERM=xterm nix eval --expr 'blah'"
+
+          # nix develop --command cargo run
