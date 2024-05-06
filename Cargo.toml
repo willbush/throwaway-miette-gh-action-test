@@ -7,4 +7,4 @@ edition = "2021"
 anyhow = "1.0.82"
 miette = { version = "7.2.0", features = ["fancy"] }
 semver = "1.0.22"
-thiserror = "1.0.58"
+thiserror = "1.0.59"

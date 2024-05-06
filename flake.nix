@@ -54,6 +54,7 @@
           packages = with pkgs; [
             rust-analyzer
             cargo-expand
+            cargo-edit
           ];
         };
       }
